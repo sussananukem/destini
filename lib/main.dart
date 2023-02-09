@@ -1,6 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'story_brain.dart';
 
 void main() {
   runApp(
@@ -38,6 +39,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  MyStoryBrain myStoryBrain = MyStoryBrain();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,9 +63,28 @@ class _MyHomePageState extends State<MyHomePage> {
                   flex: 10,
                   child: Container(
                     decoration: const BoxDecoration(
-                      image: DecorationImage(
+                       image: DecorationImage(
                         image: AssetImage(
                           'images/speech-bubble.png',
+                        ),
+                      ),
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 90, top: 40, right: 20, left: 20),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30)
+                          ),
+                          width: 512,
+                          height: 250,
+                          child: Center(
+                            child: Text(
+                              myStoryBrain.getStoryText().storyText,
+                              textAlign: TextAlign.justify,
+                              style: const TextStyle(color: Colors.white,fontSize: 16 ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -78,12 +99,17 @@ class _MyHomePageState extends State<MyHomePage> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                    onPressed: () {},
-                    child: const FittedBox(
+                    onPressed: () {
+                      setState(() {
+                        myStoryBrain.nextStory(1);
+                      });
+
+                    },
+                    child: FittedBox(
                       fit: BoxFit.fitWidth,
                       child: Text(
-                        'Choice 1',
-                        style: TextStyle(
+                          myStoryBrain.getStoryText().choiceOne,
+                        style: const TextStyle(
                           color: Colors.white,
                         ),
                       ),
@@ -102,12 +128,17 @@ class _MyHomePageState extends State<MyHomePage> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                    onPressed: () {},
-                    child: const FittedBox(
+                    onPressed: () {
+                      setState(() {
+                        myStoryBrain.nextStory(2);
+                      });
+
+                    },
+                    child: FittedBox(
                       fit: BoxFit.fitWidth,
                       child: Text(
-                        'Choice 2',
-                        style: TextStyle(
+                        myStoryBrain.getStoryText().choiceTwo,
+                        style: const TextStyle(
                           color: Colors.white,
                         ),
                       ),
