@@ -42,6 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   MyStoryBrain myStoryBrain = MyStoryBrain();
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Container(
         constraints: const BoxConstraints.expand(),
@@ -63,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   flex: 10,
                   child: Container(
                     decoration: const BoxDecoration(
-                       image: DecorationImage(
+                      image: DecorationImage(
                         image: AssetImage(
                           'images/speech-bubble.png',
                         ),
@@ -71,18 +72,24 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     child: Center(
                       child: Padding(
-                        padding: const EdgeInsets.only(bottom: 90, top: 40, right: 20, left: 20),
+                        padding: const EdgeInsets.only(
+                            bottom: 90, top: 40, right: 20, left: 20),
                         child: Container(
+                          padding: width >= 800 ? const EdgeInsets.only(
+                              bottom: 90, top: 40, right: 20, left: 20) :null,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30)
-                          ),
+                              borderRadius: BorderRadius.circular(30)),
                           width: 512,
                           height: 250,
                           child: Center(
                             child: Text(
                               myStoryBrain.getStoryText().storyText,
                               textAlign: TextAlign.justify,
-                              style: const TextStyle(color: Colors.white,fontSize: 16 ),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontFamily: 'Urbanist',
+                              ),
                             ),
                           ),
                         ),
@@ -103,14 +110,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       setState(() {
                         myStoryBrain.nextStory(1);
                       });
-
                     },
                     child: FittedBox(
                       fit: BoxFit.fitWidth,
-                      child: Text(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: Text(
                           myStoryBrain.getStoryText().choiceOne,
-                        style: const TextStyle(
-                          color: Colors.white,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontFamily: 'Urbanist',
+                          ),
                         ),
                       ),
                     ),
@@ -121,25 +132,32 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 Expanded(
                   flex: 2,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+                  child: Visibility(
+                    visible: myStoryBrain.buttonVisibility(),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                       ),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        myStoryBrain.nextStory(2);
-                      });
-
-                    },
-                    child: FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: Text(
-                        myStoryBrain.getStoryText().choiceTwo,
-                        style: const TextStyle(
-                          color: Colors.white,
+                      onPressed: () {
+                        setState(() {
+                          myStoryBrain.nextStory(2);
+                        });
+                      },
+                      child: FittedBox(
+                        fit: BoxFit.fitWidth,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: Text(
+                            myStoryBrain.getStoryText().choiceTwo,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontFamily: 'Urbanist',
+                            ),
+                          ),
                         ),
                       ),
                     ),

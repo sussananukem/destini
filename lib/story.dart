@@ -3,6 +3,7 @@ class MyStory{
   String choiceOne;
   String choiceTwo;
 
-  MyStory({required this.storyText, required this.choiceOne, required this.choiceTwo});
+  MyStory({required this.storyText, required this.choiceOne, required this
+      .choiceTwo});
 
 }
