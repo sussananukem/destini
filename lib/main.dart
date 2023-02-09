@@ -39,82 +39,114 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  StoryBrain storyBrain = StoryBrain();
+  MyStoryBrain myStoryBrain = MyStoryBrain();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(child: Text('Destini')),
-        backgroundColor: Colors.black,
-      ),
       body: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(
-                  'images/bg.jpg',
-                ),
-                fit: BoxFit.cover)),
         constraints: const BoxConstraints.expand(),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              'images/scene.jpg',
+            ),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-             children: [
-              Expanded(
-                flex: 12,
-                child: Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: Center(
-                    child: Text(
-                      storyBrain.getStory(),
-                      textAlign: TextAlign.justify,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 22.0,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  flex: 10,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                       image: DecorationImage(
+                        image: AssetImage(
+                          'images/speech-bubble.png',
+                        ),
+                      ),
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 90, top: 40, right: 20, left: 20),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30)
+                          ),
+                          width: 512,
+                          height: 250,
+                          child: Center(
+                            child: Text(
+                              myStoryBrain.getStoryText().storyText,
+                              textAlign: TextAlign.justify,
+                              style: const TextStyle(color: Colors.white,fontSize: 16 ),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
+                Expanded(
+                  flex: 2,
                   child: TextButton(
-                    onPressed: () {},
                     style: TextButton.styleFrom(
-                      backgroundColor: Colors.lightBlueAccent,
-                    ),
-                    child: Text(
-                      storyBrain.getChoiceOne(),
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 20.0,
+                      backgroundColor: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                  ),
-                ),
-              ),
+                    onPressed: () {
+                      setState(() {
+                        myStoryBrain.nextStory(1);
+                      });
 
-              Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
-                  child: TextButton(
-                    onPressed: () {},
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.blueGrey[50],
-                    ),
-                    child: Text(
-                      storyBrain.getChoiceTwo(),
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 20.0,
+                    },
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Text(
+                          myStoryBrain.getStoryText().choiceOne,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+                const SizedBox(
+                  height: 20.0,
+                ),
+                Expanded(
+                  flex: 2,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        myStoryBrain.nextStory(2);
+                      });
+
+                    },
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Text(
+                        myStoryBrain.getStoryText().choiceTwo,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

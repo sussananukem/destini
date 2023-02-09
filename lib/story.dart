@@ -1,7 +1,8 @@
-class Story{
-  late String storyText;
-  late String choiceOne;
-  late String choiceTwo;
+class MyStory{
+  String storyText;
+  String choiceOne;
+  String choiceTwo;
 
-  Story({required this.storyText, required this.choiceOne, required this.choiceTwo});
+  MyStory({required this.storyText, required this.choiceOne, required this.choiceTwo});
+
 }
