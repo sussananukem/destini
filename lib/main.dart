@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                //STORY TEXT GOES HERE
+                //MY STORY TEXT GOES HERE
                 Expanded(
                   flex: 10,
                   child: Container(
