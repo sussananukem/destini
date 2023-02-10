@@ -43,6 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   MyStoryBrain myStoryBrain = MyStoryBrain();
   @override
   Widget build(BuildContext context) {
+    //Media Query
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Container(
@@ -61,6 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                //STORY TEXT GOES HERE
                 Expanded(
                   flex: 10,
                   child: Container(
@@ -76,6 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         padding: const EdgeInsets.only(
                             bottom: 90, top: 40, right: 20, left: 20),
                         child: Container(
+                          //Applied MEDIA QUERY Here.
                           padding: width >= 800 ? const EdgeInsets.only(
                               bottom: 90, top: 40, right: 20, left: 20) :null,
                           decoration: BoxDecoration(
@@ -84,6 +87,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           height: 250,
                           child: Center(
                             child: Text(
+                              //Fetches the story text of the selected story
+                              // instance based on the story number
                               myStoryBrain.getStoryText().storyText,
                               textAlign: TextAlign.justify,
                               style: const TextStyle(
@@ -98,6 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
+                //CHOICE ONE BUTTON AND TEXT GO HERE
                 Expanded(
                   flex: 2,
                   child: TextButton(
@@ -109,6 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     onPressed: () {
                       setState(() {
+                        //Based on the choice user makes, fetches another story
                         myStoryBrain.nextStory(1);
                       });
                     },
@@ -117,6 +124,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15.0),
                         child: Text(
+                          //Fetches the choiceOne text of the selected story
+                          // instance based on the story number
                           myStoryBrain.getStoryText().choiceOne,
                           style: const TextStyle(
                             color: Colors.white,
@@ -131,6 +140,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 const SizedBox(
                   height: 20.0,
                 ),
+
+                //CHOICE TWO BUTTON AND TEXT GOES HERE
                 Expanded(
                   flex: 2,
                   child: Visibility(
@@ -144,6 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       onPressed: () {
                         setState(() {
+                          //Fetches another story based on user choice
                           myStoryBrain.nextStory(2);
                         });
                       },
@@ -152,6 +164,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15.0),
                           child: Text(
+                            //Fetches the choiceTwo text of the selected story
+                            // instance based on the story number
                             myStoryBrain.getStoryText().choiceTwo,
                             style: const TextStyle(
                               color: Colors.white,

@@ -6,6 +6,7 @@ class MyStoryBrain {
   int _storyNumber = 0;
 
   //Shows type of elements to be in the list
+  //List contains a collection of MyStory class instances
   final List<MyStory> _storyBank = [
     MyStory(
       storyText: 'Your car has blown a tire on a winding road in the middle of'
@@ -53,10 +54,14 @@ class MyStoryBrain {
         choiceTwo: 'End Game')
   ];
 
+  //This function fetches a story instance from the story bank(contains:
+  // storyText, choiceOne and choiceTwo)
   MyStory getStoryText() {
     return _storyBank[_storyNumber];
   }
 
+  //Used alongside the Visibility widget wrapped around choiceTwo button to
+  // show or hide button when a condition is satisfied
   bool buttonVisibility() {
     if (_storyNumber == 0 || _storyNumber == 1 || _storyNumber == 2) {
       return true;
@@ -65,6 +70,9 @@ class MyStoryBrain {
     }
   }
 
+  //This function is used to organize the story flow based on the use
+  // choices, i.e if user selects choiceOne when he's at story One, it takes
+  // them to a different story...etc
   void nextStory(int choiceNumber) {
     if (choiceNumber == 1 && _storyNumber == 0) {
       _storyNumber = 2;
